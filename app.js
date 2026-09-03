@@ -1,12 +1,177 @@
-const products=[{name:"Fit Me Matte + Poreless",brand:"Maybelline",category:"Base",price:54.90,store:"Amazon",icon:"◉"},{name:"SuperStay Active Wear",brand:"Maybelline",category:"Base",price:69.90,store:"Droga Raia",icon:"◉"},{name:"Fit Me Corretivo",brand:"Maybelline",category:"Corretivo",price:39.90,store:"Época Cosméticos",icon:"◌"},{name:"Blush Feels",brand:"Ruby Rose",category:"Blush",price:18.90,store:"Shopee",icon:"●"},{name:"Lash Sensational",brand:"Maybelline",category:"Máscara de cílios",price:47.90,store:"Amazon",icon:"✦"},{name:"Super Stay Vinyl Ink",brand:"Maybelline",category:"Batom",price:59.90,store:"Sephora",icon:"●"}];
-const demoRestaurants=[{name:"Casa Verde Vegetariana",description:"Pratos vegetarianos, bowls e opções veganas.",lat:-23.5505,lng:-46.6333,address:"Centro, São Paulo",image:""},{name:"Raiz Natural",description:"Restaurante vegetariano com pratos do dia e sobremesas.",lat:-23.5585,lng:-46.6620,address:"Consolação, São Paulo",image:""},{name:"Folha & Grão",description:"Comida vegetariana leve, saladas e refeições completas.",lat:-23.5637,lng:-46.6548,address:"Bela Vista, São Paulo",image:""}];
-const brand=document.querySelector("#brand"),category=document.querySelector("#category"),productList=document.querySelector("#productList"),productCount=document.querySelector("#productCount"),searchFab=document.querySelector("#searchFab"),navItems=document.querySelectorAll(".nav-item[data-view]"),views=document.querySelectorAll(".view"),restaurantList=document.querySelector("#restaurantList"),restaurantStatus=document.querySelector("#restaurantStatus"),loadRestaurantsBtn=document.querySelector("#loadRestaurantsBtn");let map,markersLayer;
-function money(v){return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
-function productSkeletons(){productList.innerHTML=Array.from({length:3}).map(()=>`<div class="skeleton-card"><div class="skeleton skeleton-img"></div><div><div class="skeleton skeleton-line w40"></div><div class="skeleton skeleton-line w80"></div><div class="skeleton skeleton-line w60"></div><div class="skeleton skeleton-line w40"></div></div></div>`).join("")}
-function restaurantSkeletons(){restaurantList.innerHTML=Array.from({length:3}).map(()=>`<div class="skeleton-card"><div class="skeleton skeleton-img"></div><div><div class="skeleton skeleton-line w80"></div><div class="skeleton skeleton-line w60"></div><div class="skeleton skeleton-line w80"></div><div class="skeleton skeleton-line w40"></div></div></div>`).join("")}
-function renderProducts(items){productCount.textContent=`${items.length} ${items.length===1?"item":"itens"}`;if(!items.length){productList.innerHTML=`<div class="empty">Nenhum produto encontrado.</div>`;return}const lowest=Math.min(...items.map(p=>p.price));productList.innerHTML=[...items].sort((a,b)=>a.price-b.price).map(p=>`<article class="product-card"><div class="thumb">${p.icon}</div><div>${p.price===lowest?`<span class="best">MELHOR PREÇO</span>`:""}<h4>${p.name}</h4><p class="meta">${p.brand} · ${p.category}</p><div class="price">${money(p.price)}</div><p class="meta">${p.store}</p></div></article>`).join("")}
-function searchProducts(){productSkeletons();const b=brand.value.trim().toLowerCase(),c=category.value.trim().toLowerCase();setTimeout(()=>{renderProducts(products.filter(p=>(!b||p.brand.toLowerCase().includes(b))&&(!c||p.category.toLowerCase()===c)))},900)}
-function initMap(){if(map)return;map=L.map("map").setView([-23.5505,-46.6333],12);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);markersLayer=L.layerGroup().addTo(map)}
-function renderRestaurants(items){restaurantList.innerHTML=items.map(r=>`<article class="restaurant-card"><div class="thumb">${r.image?`<img src="${r.image}" alt="">`:"🥗"}</div><div><h4>${r.name}</h4><p class="meta">${r.description}</p><p class="meta">${r.address}</p><span class="pill">${r.lat.toFixed(4)}, ${r.lng.toFixed(4)}</span></div></article>`).join("");initMap();markersLayer.clearLayers();items.forEach(r=>L.marker([r.lat,r.lng]).bindPopup(`<strong>${r.name}</strong><br>${r.description}`).addTo(markersLayer));if(items.length){const group=L.featureGroup(items.map(r=>L.marker([r.lat,r.lng])));map.fitBounds(group.getBounds().pad(.35))}}
-async function loadRestaurants(){restaurantStatus.textContent="Carregando...";restaurantSkeletons();await new Promise(r=>setTimeout(r,1300));renderRestaurants(demoRestaurants);restaurantStatus.textContent="Dados de demonstração carregados"}
-searchFab.addEventListener("click",()=>document.querySelector(".view.active")?.id==="homeView"?searchProducts():loadRestaurants());brand.addEventListener("keydown",e=>{if(e.key==="Enter")searchProducts()});loadRestaurantsBtn.addEventListener("click",loadRestaurants);navItems.forEach(btn=>btn.addEventListener("click",()=>{navItems.forEach(i=>i.classList.remove("active"));btn.classList.add("active");views.forEach(v=>v.classList.remove("active"));document.querySelector("#"+btn.dataset.view).classList.add("active");if(btn.dataset.view==="homeView"){searchFab.innerHTML="<span>⌕</span><strong>Pesquisar</strong>"}else{searchFab.innerHTML="<span>↻</span><strong>Atualizar feed</strong>";setTimeout(()=>{initMap();map.invalidateSize();if(!restaurantList.children.length)loadRestaurants()},100)}}));renderProducts(products);if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(console.error));
+const products = [
+  {
+    name: "Fit Me Matte + Poreless",
+    brand: "Maybelline",
+    category: "Base",
+    price: 54.90,
+    store: "Amazon",
+    icon: "◉"
+  },
+  {
+    name: "SuperStay Active Wear",
+    brand: "Maybelline",
+    category: "Base",
+    price: 69.90,
+    store: "Droga Raia",
+    icon: "◉"
+  },
+  {
+    name: "Fit Me Corretivo",
+    brand: "Maybelline",
+    category: "Corretivo",
+    price: 39.90,
+    store: "Época Cosméticos",
+    icon: "◌"
+  },
+  {
+    name: "Blush Feels",
+    brand: "Ruby Rose",
+    category: "Blush",
+    price: 18.90,
+    store: "Shopee",
+    icon: "●"
+  },
+  {
+    name: "Lash Sensational",
+    brand: "Maybelline",
+    category: "Máscara de cílios",
+    price: 47.90,
+    store: "Amazon",
+    icon: "✦"
+  },
+  {
+    name: "Super Stay Vinyl Ink",
+    brand: "Maybelline",
+    category: "Batom",
+    price: 59.90,
+    store: "Sephora",
+    icon: "●"
+  }
+];
+
+const brand = document.querySelector("#brand");
+const category = document.querySelector("#category");
+const productList = document.querySelector("#productList");
+const productCount = document.querySelector("#productCount");
+const searchFab = document.querySelector("#searchFab");
+
+function money(value) {
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
+}
+
+function productSkeletons() {
+  productList.innerHTML = Array.from({ length: 3 })
+    .map(
+      () => `
+        <div class="skeleton-card">
+          <div class="skeleton skeleton-img"></div>
+
+          <div>
+            <div class="skeleton skeleton-line w40"></div>
+            <div class="skeleton skeleton-line w80"></div>
+            <div class="skeleton skeleton-line w60"></div>
+            <div class="skeleton skeleton-line w40"></div>
+          </div>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function renderProducts(items) {
+  productCount.textContent =
+    `${items.length} ${items.length === 1 ? "item" : "itens"}`;
+
+  if (!items.length) {
+    productList.innerHTML = `
+      <div class="empty">
+        Nenhum produto encontrado.
+      </div>
+    `;
+    return;
+  }
+
+  const lowest = Math.min(...items.map(product => product.price));
+
+  productList.innerHTML = [...items]
+    .sort((a, b) => a.price - b.price)
+    .map(
+      product => `
+        <article class="product-card">
+
+          <div class="thumb">
+            ${product.icon}
+          </div>
+
+          <div>
+
+            ${
+              product.price === lowest
+                ? `<span class="best">MELHOR PREÇO</span>`
+                : ""
+            }
+
+            <h4>${product.name}</h4>
+
+            <p class="meta">
+              ${product.brand} · ${product.category}
+            </p>
+
+            <div class="price">
+              ${money(product.price)}
+            </div>
+
+            <p class="meta">
+              ${product.store}
+            </p>
+
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function searchProducts() {
+  productSkeletons();
+
+  const selectedBrand = brand.value.trim().toLowerCase();
+  const selectedCategory = category.value.trim().toLowerCase();
+
+  setTimeout(() => {
+    const filteredProducts = products.filter(product => {
+      const matchesBrand =
+        !selectedBrand ||
+        product.brand.toLowerCase().includes(selectedBrand);
+
+      const matchesCategory =
+        !selectedCategory ||
+        product.category.toLowerCase() === selectedCategory;
+
+      return matchesBrand && matchesCategory;
+    });
+
+    renderProducts(filteredProducts);
+  }, 900);
+}
+
+searchFab.addEventListener("click", searchProducts);
+
+brand.addEventListener("keydown", event => {
+  if (event.key === "Enter") {
+    searchProducts();
+  }
+});
+
+renderProducts(products);
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .catch(console.error);
+  });
+}
