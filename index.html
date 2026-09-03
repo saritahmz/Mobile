@@ -36,7 +36,11 @@
         </h1>
       </div>
 
-      <button class="icon-btn" aria-label="Favoritos">
+      <button
+        id="wishlistTopBtn"
+        class="icon-btn"
+        aria-label="Abrir lista de desejos"
+      >
         ♡
       </button>
 
@@ -44,6 +48,7 @@
 
     <main>
 
+      <!-- TELA INICIAL -->
       <section id="homeView" class="view active">
 
         <section class="hero">
@@ -107,7 +112,6 @@
           <div class="section-heading">
 
             <div>
-
               <span class="eyebrow">
                 RESULTADOS
               </span>
@@ -115,7 +119,6 @@
               <h3>
                 Produtos encontrados
               </h3>
-
             </div>
 
             <span
@@ -130,6 +133,57 @@
           <div
             id="productList"
             class="product-list"
+          ></div>
+
+        </section>
+
+      </section>
+
+      <!-- LISTA DE DESEJOS -->
+      <section id="wishlistView" class="view">
+
+        <section class="hero compact">
+
+          <span class="eyebrow">
+            FAVORITOS
+          </span>
+
+          <h2>
+            Lista de desejos
+          </h2>
+
+          <p>
+            Arraste um produto para a esquerda para removê-lo da lista.
+          </p>
+
+        </section>
+
+        <section class="results">
+
+          <div class="section-heading">
+
+            <div>
+              <span class="eyebrow">
+                SALVOS
+              </span>
+
+              <h3>
+                Seus produtos favoritos
+              </h3>
+            </div>
+
+            <span
+              id="wishlistCount"
+              class="pill"
+            >
+              0 itens
+            </span>
+
+          </div>
+
+          <div
+            id="wishlist"
+            class="wishlist-list"
           ></div>
 
         </section>
@@ -152,14 +206,20 @@
       aria-label="Navegação principal"
     >
 
-      <button class="nav-item active">
+      <button
+        class="nav-item active"
+        data-view="homeView"
+      >
         <span>⌂</span>
         <small>Início</small>
       </button>
 
-      <button class="nav-item">
+      <button
+        class="nav-item"
+        data-view="wishlistView"
+      >
         <span>♡</span>
-        <small>Favoritos</small>
+        <small>Desejos</small>
       </button>
 
     </nav>
