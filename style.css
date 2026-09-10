@@ -541,3 +541,99 @@ select:focus {
 .wishlist-card:active {
     cursor: grabbing;
 }
+
+/* =========================
+   CONFIRMAÇÃO DA PESQUISA
+========================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(35, 20, 31, 0.55);
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.3s ease;
+
+    z-index: 999;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.confirmation-modal {
+    width: 100%;
+    max-width: 320px;
+
+    padding: 28px 24px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px rgba(60, 30, 50, 0.20);
+
+    transform:
+        translateY(30px) scale(0.9);
+}
+
+#lottie-container {
+    width: 120px;
+    height: 120px;
+
+    margin:
+        0 auto 12px;
+}
+
+.confirmation-modal h2 {
+    margin-bottom: 8px;
+
+    color: #2f2029;
+
+    font-size: 1.4rem;
+}
+
+.confirmation-modal p {
+    margin-bottom: 20px;
+
+    color: #776a72;
+
+    font-size: 0.9rem;
+
+    line-height: 1.5;
+}
+
+.confirmation-btn {
+    width: 100%;
+
+    min-height: 48px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #7a3d63;
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.confirmation-btn:active {
+    transform: scale(0.98);
+}
