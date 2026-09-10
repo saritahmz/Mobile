@@ -1,5 +1,4 @@
 const products = [
-
   {
     id: 1,
     name: "Fit Me Matte + Poreless",
@@ -9,7 +8,6 @@ const products = [
     store: "Amazon",
     icon: "◉"
   },
-
   {
     id: 2,
     name: "SuperStay Active Wear",
@@ -19,7 +17,6 @@ const products = [
     store: "Droga Raia",
     icon: "◉"
   },
-
   {
     id: 3,
     name: "Fit Me Corretivo",
@@ -29,7 +26,6 @@ const products = [
     store: "Época Cosméticos",
     icon: "◌"
   },
-
   {
     id: 4,
     name: "Blush Feels",
@@ -39,7 +35,6 @@ const products = [
     store: "Shopee",
     icon: "●"
   },
-
   {
     id: 5,
     name: "Lash Sensational",
@@ -49,7 +44,6 @@ const products = [
     store: "Amazon",
     icon: "✦"
   },
-
   {
     id: 6,
     name: "Super Stay Vinyl Ink",
@@ -59,65 +53,37 @@ const products = [
     store: "Sephora",
     icon: "●"
   }
-
 ];
 
 
 /* =========================
-   ELEMENTOS DO HTML
+   ELEMENTOS
 ========================= */
 
-const brand =
-  document.querySelector("#brand");
+const brand = document.querySelector("#brand");
+const category = document.querySelector("#category");
 
-const category =
-  document.querySelector("#category");
+const productList = document.querySelector("#productList");
+const productCount = document.querySelector("#productCount");
 
-const productList =
-  document.querySelector("#productList");
+const wishlistList = document.querySelector("#wishlist");
+const wishlistCount = document.querySelector("#wishlistCount");
 
-const productCount =
-  document.querySelector("#productCount");
+const searchFab = document.querySelector("#searchFab");
 
-const wishlistList =
-  document.querySelector("#wishlist");
+const navItems = document.querySelectorAll(".nav-item[data-view]");
+const views = document.querySelectorAll(".view");
 
-const wishlistCount =
-  document.querySelector("#wishlistCount");
-
-const searchFab =
-  document.querySelector("#searchFab");
-
-const navItems =
-  document.querySelectorAll(
-    ".nav-item[data-view]"
-  );
-
-const views =
-  document.querySelectorAll(".view");
-
-const wishlistTopBtn =
-  document.querySelector(
-    "#wishlistTopBtn"
-  );
+const wishlistTopBtn = document.querySelector("#wishlistTopBtn");
 
 
 /* MODAL */
 
-const searchConfirmation =
-  document.querySelector(
-    "#searchConfirmation"
-  );
+const searchConfirmation = document.querySelector("#searchConfirmation");
 
-const confirmationModal =
-  document.querySelector(
-    "#confirmationModal"
-  );
+const confirmationModal = document.querySelector("#confirmationModal");
 
-const closeConfirmation =
-  document.querySelector(
-    "#closeConfirmation"
-  );
+const closeConfirmationBtn = document.querySelector("#closeConfirmation");
 
 
 /* =========================
@@ -125,35 +91,25 @@ const closeConfirmation =
 ========================= */
 
 let wishlist =
-  JSON.parse(
-    localStorage.getItem(
-      "beautyWishlist"
-    )
-  ) || [];
+  JSON.parse(localStorage.getItem("beautyWishlist")) || [];
 
 
 /* =========================
-   DINHEIRO
+   FORMATAR PREÇO
 ========================= */
 
 function money(value) {
 
-  return value.toLocaleString(
-    "pt-BR",
-    {
-      style:
-        "currency",
-
-      currency:
-        "BRL"
-    }
-  );
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
 
 }
 
 
 /* =========================
-   SALVAR FAVORITOS
+   SALVAR LISTA DE DESEJOS
 ========================= */
 
 function saveWishlist() {
@@ -169,56 +125,42 @@ function saveWishlist() {
 function isFavorite(id) {
 
   return wishlist.some(
-    product =>
-      product.id === id
+    product => product.id === id
   );
 
 }
 
 
 /* =========================
-   SKELETON
+   SKELETON SCREEN
 ========================= */
 
 function productSkeletons() {
 
-  productList.innerHTML =
-    Array.from(
-      {
-        length: 3
-      }
-    )
+  productCount.textContent = "Carregando...";
+
+  productList.innerHTML = Array.from({
+    length: 3
+  })
     .map(
       () => `
-
         <div class="skeleton-card">
 
-          <div
-            class="skeleton skeleton-img"
-          ></div>
+          <div class="skeleton skeleton-img"></div>
 
           <div>
 
-            <div
-              class="skeleton skeleton-line w40"
-            ></div>
+            <div class="skeleton skeleton-line w40"></div>
 
-            <div
-              class="skeleton skeleton-line w80"
-            ></div>
+            <div class="skeleton skeleton-line w80"></div>
 
-            <div
-              class="skeleton skeleton-line w60"
-            ></div>
+            <div class="skeleton skeleton-line w60"></div>
 
-            <div
-              class="skeleton skeleton-line w40"
-            ></div>
+            <div class="skeleton skeleton-line w40"></div>
 
           </div>
 
         </div>
-
       `
     )
     .join("");
@@ -227,29 +169,21 @@ function productSkeletons() {
 
 
 /* =========================
-   PRODUTOS
+   MOSTRAR PRODUTOS
 ========================= */
 
 function renderProducts(items) {
 
   productCount.textContent =
-    `${items.length} ${
-      items.length === 1
-        ? "item"
-        : "itens"
-    }`;
+    `${items.length} ${items.length === 1 ? "item" : "itens"}`;
 
 
   if (!items.length) {
 
     productList.innerHTML = `
-
       <div class="empty">
-
         Nenhum produto encontrado.
-
       </div>
-
     `;
 
     return;
@@ -257,150 +191,96 @@ function renderProducts(items) {
   }
 
 
-  const lowest =
-    Math.min(
-      ...items.map(
-        product =>
-          product.price
-      )
-    );
+  const lowest = Math.min(
+    ...items.map(
+      product => product.price
+    )
+  );
 
 
-  productList.innerHTML =
-    [...items]
+  productList.innerHTML = [...items]
 
-      .sort(
-        (a, b) =>
-          a.price - b.price
-      )
+    .sort(
+      (a, b) => a.price - b.price
+    )
 
-      .map(
-        product => `
+    .map(
+      product => `
+        <article class="product-card">
 
-          <article
-            class="product-card"
+          <div class="thumb">
+            ${product.icon}
+          </div>
+
+
+          <div class="product-info">
+
+            ${product.price === lowest
+          ? `
+                  <span class="best">
+                    MELHOR PREÇO
+                  </span>
+                `
+          : ""
+        }
+
+
+            <h4>
+              ${product.name}
+            </h4>
+
+
+            <p class="meta">
+              ${product.brand} · ${product.category}
+            </p>
+
+
+            <div class="price">
+              ${money(product.price)}
+            </div>
+
+
+            <p class="meta">
+              ${product.store}
+            </p>
+
+          </div>
+
+
+          <button
+            class="favorite-btn ${isFavorite(product.id) ? "active" : ""
+        }"
+            data-id="${product.id}"
+            aria-label="Adicionar à lista de desejos"
           >
 
-            <div class="thumb">
+            ${isFavorite(product.id)
+          ? "♥"
+          : "♡"
+        }
 
-              ${product.icon}
+          </button>
 
-            </div>
-
-
-            <div class="product-info">
-
-              ${
-                product.price ===
-                lowest
-
-                  ? `
-                    <span class="best">
-                      MELHOR PREÇO
-                    </span>
-                  `
-
-                  : ""
-              }
-
-
-              <h4>
-
-                ${product.name}
-
-              </h4>
-
-
-              <p class="meta">
-
-                ${product.brand}
-                ·
-                ${product.category}
-
-              </p>
-
-
-              <div class="price">
-
-                ${money(
-                  product.price
-                )}
-
-              </div>
-
-
-              <p class="meta">
-
-                ${product.store}
-
-              </p>
-
-            </div>
-
-
-            <button
-
-              class="
-                favorite-btn
-                ${
-                  isFavorite(
-                    product.id
-                  )
-                    ? "active"
-                    : ""
-                }
-              "
-
-              data-id="
-                ${product.id}
-              "
-
-              aria-label="
-                Adicionar à lista de desejos
-              "
-
-            >
-
-              ${
-                isFavorite(
-                  product.id
-                )
-                  ? "♥"
-                  : "♡"
-              }
-
-            </button>
-
-          </article>
-
-        `
-      )
-      .join("");
+        </article>
+      `
+    )
+    .join("");
 
 
   document
-    .querySelectorAll(
-      ".favorite-btn"
-    )
-    .forEach(
-      button => {
+    .querySelectorAll(".favorite-btn")
+    .forEach(button => {
 
-        button.addEventListener(
-          "click",
-          () => {
+      button.addEventListener("click", () => {
 
-            const id =
-              Number(
-                button.dataset.id
-              );
+        const id =
+          Number(button.dataset.id);
 
-            toggleFavorite(id);
+        toggleFavorite(id);
 
-          }
-        );
+      });
 
-      }
-    );
+    });
 
 }
 
@@ -413,15 +293,13 @@ function toggleFavorite(id) {
 
   const product =
     products.find(
-      item =>
-        item.id === id
+      item => item.id === id
     );
 
 
   const exists =
     wishlist.some(
-      item =>
-        item.id === id
+      item => item.id === id
     );
 
 
@@ -429,8 +307,7 @@ function toggleFavorite(id) {
 
     wishlist =
       wishlist.filter(
-        item =>
-          item.id !== id
+        item => item.id !== id
       );
 
   } else {
@@ -450,30 +327,24 @@ function toggleFavorite(id) {
 
 
 /* =========================
-   LISTA DE DESEJOS
+   RENDERIZAR FAVORITOS
 ========================= */
 
 function renderWishlist() {
 
   wishlistCount.textContent =
-    `${wishlist.length} ${
-      wishlist.length === 1
-        ? "item"
-        : "itens"
+    `${wishlist.length} ${wishlist.length === 1
+      ? "item"
+      : "itens"
     }`;
 
 
   if (!wishlist.length) {
 
     wishlistList.innerHTML = `
-
       <div class="empty">
-
-        Sua lista de desejos
-        está vazia.
-
+        Sua lista de desejos está vazia.
       </div>
-
     `;
 
     return;
@@ -483,18 +354,14 @@ function renderWishlist() {
 
   wishlistList.innerHTML =
     wishlist
-
       .map(
         product => `
-
           <div
             class="swipe-wrapper"
             data-id="${product.id}"
           >
 
-            <div
-              class="delete-background"
-            >
+            <div class="delete-background">
 
               <span>
                 Excluir
@@ -507,48 +374,29 @@ function renderWishlist() {
             </div>
 
 
-            <article
-              class="wishlist-card"
-            >
+            <article class="wishlist-card">
 
               <div class="thumb">
-
                 ${product.icon}
-
               </div>
 
 
               <div>
 
                 <h4>
-
                   ${product.name}
-
                 </h4>
 
-
                 <p class="meta">
-
-                  ${product.brand}
-                  ·
-                  ${product.category}
-
+                  ${product.brand} · ${product.category}
                 </p>
 
-
                 <div class="price">
-
-                  ${money(
-                    product.price
-                  )}
-
+                  ${money(product.price)}
                 </div>
 
-
                 <p class="meta">
-
                   ${product.store}
-
                 </p>
 
               </div>
@@ -556,7 +404,6 @@ function renderWishlist() {
             </article>
 
           </div>
-
         `
       )
       .join("");
@@ -574,128 +421,100 @@ function renderWishlist() {
 function activateSwipeToDelete() {
 
   const swipeItems =
-    document.querySelectorAll(
-      ".swipe-wrapper"
+    document.querySelectorAll(".swipe-wrapper");
+
+
+  swipeItems.forEach(wrapper => {
+
+    const card =
+      wrapper.querySelector(".wishlist-card");
+
+
+    let startX = 0;
+
+    let currentX = 0;
+
+    let dragging = false;
+
+
+    card.addEventListener(
+      "touchstart",
+      event => {
+
+        startX =
+          event.touches[0].clientX;
+
+        dragging = true;
+
+        card.style.transition =
+          "none";
+
+      }
     );
 
 
-  swipeItems.forEach(
-    wrapper => {
+    card.addEventListener(
+      "touchmove",
+      event => {
 
-      const card =
-        wrapper.querySelector(
-          ".wishlist-card"
-        );
+        if (!dragging) return;
 
 
-      let startX = 0;
-
-      let currentX = 0;
-
-      let dragging = false;
+        currentX =
+          event.touches[0].clientX - startX;
 
 
-      card.addEventListener(
-        "touchstart",
-        event => {
+        if (currentX < 0) {
 
-          startX =
-            event
-              .touches[0]
-              .clientX;
-
-          dragging = true;
-
-          card.style.transition =
-            "none";
+          card.style.transform =
+            `translateX(${Math.max(currentX, -120)}px)`;
 
         }
-      );
+
+      }
+    );
 
 
-      card.addEventListener(
-        "touchmove",
-        event => {
+    card.addEventListener(
+      "touchend",
+      () => {
 
-          if (!dragging) {
-            return;
-          }
+        dragging = false;
 
 
-          currentX =
-            event
-              .touches[0]
-              .clientX
-            -
-            startX;
+        card.style.transition =
+          "transform 0.25s ease";
 
 
-          if (currentX < 0) {
+        if (currentX < -80) {
 
-            card.style.transform =
-              `translateX(${
-                Math.max(
-                  currentX,
-                  -120
-                )
-              }px)`;
-
-          }
-
-        }
-      );
+          card.style.transform =
+            "translateX(-100%)";
 
 
-      card.addEventListener(
-        "touchend",
-        () => {
+          setTimeout(() => {
 
-          dragging =
-            false;
+            const id =
+              Number(wrapper.dataset.id);
 
+            removeFromWishlist(id);
 
-          card.style.transition =
-            "transform 0.25s ease";
+          }, 250);
 
+        } else {
 
-          if (currentX < -80) {
-
-            card.style.transform =
-              "translateX(-100%)";
-
-
-            setTimeout(
-              () => {
-
-                const id =
-                  Number(
-                    wrapper.dataset.id
-                  );
-
-                removeFromWishlist(
-                  id
-                );
-
-              },
-              250
-            );
-
-          } else {
-
-            card.style.transform =
-              "translateX(0)";
-
-          }
-
-
-          currentX =
-            0;
+          card.style.transform =
+            "translateX(0)";
 
         }
-      );
 
-    }
-  );
+
+        currentX = 0;
+
+      }
+    );
+
+  });
 
 }
 
@@ -723,212 +542,192 @@ function removeFromWishlist(id) {
 
 
 /* =========================
-   LOTTIE
+   ANIMAÇÃO LOTTIE
 ========================= */
 
-const sampleLottieJSON =
+const lottieData = {
 
-  "data:text/json;charset=utf-8," +
+  v: "5.7.4",
 
-  encodeURIComponent(
+  fr: 60,
 
-    JSON.stringify({
+  ip: 0,
 
-      v: "5.5.7",
+  op: 60,
 
-      fr: 60,
+  w: 200,
 
-      ip: 0,
+  h: 200,
 
-      op: 60,
+  nm: "Check",
 
-      w: 100,
+  ddd: 0,
 
-      h: 100,
+  assets: [],
+
+  layers: [
+
+    {
+      ddd: 0,
+
+      ind: 1,
+
+      ty: 4,
 
       nm: "Check",
 
+      sr: 1,
 
-      layers: [
+      ks: {
+
+        o: {
+          a: 0,
+          k: 100
+        },
+
+        r: {
+          a: 0,
+          k: 0
+        },
+
+        p: {
+          a: 0,
+          k: [100, 100, 0]
+        },
+
+        a: {
+          a: 0,
+          k: [0, 0, 0]
+        },
+
+        s: {
+          a: 1,
+
+          k: [
+
+            {
+              t: 0,
+              s: [0, 0, 100]
+            },
+
+            {
+              t: 20,
+              s: [120, 120, 100]
+            },
+
+            {
+              t: 30,
+              s: [100, 100, 100]
+            }
+
+          ]
+
+        }
+
+      },
+
+      shapes: [
 
         {
 
-          ddd: 0,
+          ty: "gr",
 
-          ind: 1,
-
-          ty: 4,
-
-          nm: "Checkmark",
-
-          sr: 1,
-
-
-          ks: {
-
-            o: {
-              a: 0,
-              k: 100
-            },
-
-            r: {
-              a: 0,
-              k: 0
-            },
-
-            p: {
-              a: 0,
-              k: [50, 50, 0]
-            },
-
-            a: {
-              a: 0,
-              k: [0, 0, 0]
-            },
-
-            s: {
-              a: 0,
-              k: [100, 100, 100]
-            }
-
-          },
-
-
-          shapes: [
+          it: [
 
             {
 
-              ty: "grp",
+              ty: "sh",
 
+              ks: {
 
-              items: [
+                a: 0,
 
-                {
+                k: {
 
-                  ty: "sh",
+                  i: [
+                    [0, 0],
+                    [0, 0],
+                    [0, 0]
+                  ],
 
+                  o: [
+                    [0, 0],
+                    [0, 0],
+                    [0, 0]
+                  ],
 
-                  ks: {
+                  v: [
+                    [-35, 0],
+                    [-10, 25],
+                    [40, -30]
+                  ],
 
-                    a: 0,
-
-
-                    k: {
-
-                      i: [
-                        [0, 0],
-                        [0, 0],
-                        [0, 0]
-                      ],
-
-                      o: [
-                        [0, 0],
-                        [0, 0],
-                        [0, 0]
-                      ],
-
-                      v: [
-                        [-20, 0],
-                        [-5, 15],
-                        [20, -10]
-                      ],
-
-                      c: false
-
-                    }
-
-                  }
-
-                },
-
-
-                {
-
-                  ty: "st",
-
-
-                  c: {
-
-                    a: 0,
-
-                    k: [
-                      0.48,
-                      0.24,
-                      0.39,
-                      1
-                    ]
-
-                  },
-
-
-                  w: {
-
-                    a: 0,
-
-                    k: 7
-
-                  },
-
-
-                  lc: 2,
-
-                  lj: 2
-
-                },
-
-
-                {
-
-                  ty: "tr",
-
-
-                  p: {
-
-                    a: 0,
-
-                    k: [0, 0]
-
-                  },
-
-
-                  a: {
-
-                    a: 0,
-
-                    k: [0, 0]
-
-                  },
-
-
-                  s: {
-
-                    a: 0,
-
-                    k: [100, 100]
-
-                  },
-
-
-                  r: {
-
-                    a: 0,
-
-                    k: 0
-
-                  },
-
-
-                  o: {
-
-                    a: 0,
-
-                    k: 100
-
-                  }
+                  c: false
 
                 }
 
-              ]
+              }
+
+            },
+
+            {
+
+              ty: "st",
+
+              c: {
+                a: 0,
+                k: [
+                  0.478,
+                  0.239,
+                  0.388,
+                  1
+                ]
+              },
+
+              o: {
+                a: 0,
+                k: 100
+              },
+
+              w: {
+                a: 0,
+                k: 10
+              },
+
+              lc: 2,
+
+              lj: 2
+
+            },
+
+            {
+
+              ty: "tr",
+
+              p: {
+                a: 0,
+                k: [0, 0]
+              },
+
+              a: {
+                a: 0,
+                k: [0, 0]
+              },
+
+              s: {
+                a: 0,
+                k: [100, 100]
+              },
+
+              r: {
+                a: 0,
+                k: 0
+              },
+
+              o: {
+                a: 0,
+                k: 100
+              }
 
             }
 
@@ -936,29 +735,35 @@ const sampleLottieJSON =
 
         }
 
-      ]
+      ],
 
-    })
+      ip: 0,
 
-  );
+      op: 60,
+
+      st: 0,
+
+      bm: 0
+
+    }
+
+  ]
+
+};
 
 
-let lottieAnimation =
-  null;
+let lottieAnimation = null;
 
 
 if (
-  typeof lottie !==
-  "undefined"
+  typeof lottie !== "undefined"
 ) {
 
   lottieAnimation =
     lottie.loadAnimation({
 
       container:
-        document.querySelector(
-          "#lottie-container"
-        ),
+        document.querySelector("#lottie-container"),
 
       renderer:
         "svg",
@@ -969,8 +774,8 @@ if (
       autoplay:
         false,
 
-      path:
-        sampleLottieJSON
+      animationData:
+        lottieData
 
     });
 
@@ -978,39 +783,29 @@ if (
 
 
 /* =========================
-   ABRIR CONFIRMAÇÃO
+   ABRIR MODAL
 ========================= */
 
 function showSearchConfirmation() {
 
-  searchConfirmation
-    .classList
-    .add("active");
+  if (!searchConfirmation) {
+    return;
+  }
 
+
+  searchConfirmation.classList.add(
+    "active"
+  );
+
+
+  /*
+    MOTION ONE
+  */
 
   if (
-    typeof Motion !==
-    "undefined"
+    typeof Motion !== "undefined" &&
+    Motion.animate
   ) {
-
-    Motion.animate(
-
-      searchConfirmation,
-
-      {
-        opacity: [
-          0,
-          1
-        ]
-      },
-
-      {
-        duration:
-          0.2
-      }
-
-    );
-
 
     Motion.animate(
 
@@ -1023,21 +818,16 @@ function showSearchConfirmation() {
 
           "translateY(0px) scale(1)"
 
+        ],
+
+        opacity: [
+          0,
+          1
         ]
       },
 
       {
-
-        duration:
-          0.3,
-
-        easing: [
-          0.175,
-          0.885,
-          0.32,
-          1.275
-        ]
-
+        duration: 0.35
       }
 
     );
@@ -1045,13 +835,15 @@ function showSearchConfirmation() {
   }
 
 
+  /*
+    LOTTIE
+  */
+
   if (lottieAnimation) {
 
-    lottieAnimation
-      .goToAndPlay(
-        0,
-        true
-      );
+    lottieAnimation.stop();
+
+    lottieAnimation.play();
 
   }
 
@@ -1059,21 +851,34 @@ function showSearchConfirmation() {
 
 
 /* =========================
-   FECHAR CONFIRMAÇÃO
+   FECHAR MODAL
 ========================= */
 
 function hideSearchConfirmation() {
 
+  if (!searchConfirmation) {
+    return;
+  }
+
+
   if (
-    typeof Motion !==
-    "undefined"
+    typeof Motion !== "undefined" &&
+    Motion.animate
   ) {
 
     Motion.animate(
 
-      searchConfirmation,
+      confirmationModal,
 
       {
+        transform: [
+
+          "translateY(0px) scale(1)",
+
+          "translateY(20px) scale(0.95)"
+
+        ],
+
         opacity: [
           1,
           0
@@ -1081,31 +886,25 @@ function hideSearchConfirmation() {
       },
 
       {
-        duration:
-          0.2
+        duration: 0.2
       }
 
-    )
-    .finished
-    .then(
-      () => {
-
-        searchConfirmation
-          .classList
-          .remove(
-            "active"
-          );
-
-      }
     );
+
+
+    setTimeout(() => {
+
+      searchConfirmation
+        .classList
+        .remove("active");
+
+    }, 200);
 
   } else {
 
     searchConfirmation
       .classList
-      .remove(
-        "active"
-      );
+      .remove("active");
 
   }
 
@@ -1113,7 +912,7 @@ function hideSearchConfirmation() {
 
 
 /* =========================
-   PESQUISAR
+   PESQUISA
 ========================= */
 
 function searchProducts() {
@@ -1121,85 +920,64 @@ function searchProducts() {
   productSkeletons();
 
 
-  productCount.textContent =
-    "Carregando...";
-
-
   const selectedBrand =
-    brand
-      .value
+    brand.value
       .trim()
       .toLowerCase();
 
 
   const selectedCategory =
-    category
-      .value
+    category.value
       .trim()
       .toLowerCase();
 
 
-  setTimeout(
-    () => {
+  setTimeout(() => {
 
-      const filteredProducts =
-        products.filter(
-          product => {
+    const filteredProducts =
+      products.filter(product => {
 
 
-            const matchesBrand =
+        const matchesBrand =
 
-              !selectedBrand ||
+          !selectedBrand ||
 
-              product
-                .brand
-                .toLowerCase()
-                .includes(
-                  selectedBrand
-                );
+          product.brand
+            .toLowerCase()
+            .includes(selectedBrand);
 
 
-            const matchesCategory =
+        const matchesCategory =
 
-              !selectedCategory ||
+          !selectedCategory ||
 
-              product
-                .category
-                .toLowerCase()
-                .includes(
-                  selectedCategory
-                );
+          product.category
+            .toLowerCase()
+            .includes(selectedCategory);
 
 
-            return (
-
-              matchesBrand &&
-
-              matchesCategory
-
-            );
-
-          }
+        return (
+          matchesBrand &&
+          matchesCategory
         );
 
-
-      renderProducts(
-        filteredProducts
-      );
+      });
 
 
-      if (
-        filteredProducts.length >
-        0
-      ) {
+    renderProducts(
+      filteredProducts
+    );
 
-        showSearchConfirmation();
 
-      }
+    /*
+      MOSTRA A CONFIRMAÇÃO
+      DEPOIS DA PESQUISA
+    */
 
-    },
-    900
-  );
+    showSearchConfirmation();
+
+
+  }, 900);
 
 }
 
@@ -1210,26 +988,22 @@ function searchProducts() {
 
 function changeView(viewId) {
 
-  views.forEach(
-    view =>
-      view.classList.remove(
-        "active"
-      )
-  );
+  views.forEach(view => {
+
+    view.classList.remove("active");
+
+  });
 
 
-  navItems.forEach(
-    item =>
-      item.classList.remove(
-        "active"
-      )
-  );
+  navItems.forEach(item => {
+
+    item.classList.remove("active");
+
+  });
 
 
   document
-    .querySelector(
-      `#${viewId}`
-    )
+    .querySelector(`#${viewId}`)
     .classList
     .add("active");
 
@@ -1243,8 +1017,7 @@ function changeView(viewId) {
 
 
   if (
-    viewId ===
-    "wishlistView"
+    viewId === "wishlistView"
   ) {
 
     searchFab.style.display =
@@ -1267,79 +1040,43 @@ function changeView(viewId) {
 ========================= */
 
 searchFab.addEventListener(
-
   "click",
-
   searchProducts
-
 );
 
 
 brand.addEventListener(
-
   "keydown",
-
   event => {
 
-    if (
-      event.key ===
-      "Enter"
-    ) {
+    if (event.key === "Enter") {
 
       searchProducts();
 
     }
 
   }
-
 );
 
 
-category.addEventListener(
+navItems.forEach(item => {
 
-  "keydown",
+  item.addEventListener(
+    "click",
+    () => {
 
-  event => {
-
-    if (
-      event.key ===
-      "Enter"
-    ) {
-
-      searchProducts();
+      changeView(
+        item.dataset.view
+      );
 
     }
+  );
 
-  }
-
-);
-
-
-navItems.forEach(
-  item => {
-
-    item.addEventListener(
-
-      "click",
-
-      () => {
-
-        changeView(
-          item.dataset.view
-        );
-
-      }
-
-    );
-
-  }
-);
+});
 
 
 wishlistTopBtn.addEventListener(
-
   "click",
-
   () => {
 
     changeView(
@@ -1347,49 +1084,46 @@ wishlistTopBtn.addEventListener(
     );
 
   }
-
 );
 
 
-/* BOTÃO VER RESULTADOS */
+/* FECHAR MODAL */
 
-closeConfirmation.addEventListener(
+if (closeConfirmationBtn) {
 
-  "click",
+  closeConfirmationBtn.addEventListener(
+    "click",
+    hideSearchConfirmation
+  );
 
-  () => {
-
-    hideSearchConfirmation();
-
-  }
-
-);
+}
 
 
 /* CLICAR FORA DO MODAL */
 
-searchConfirmation.addEventListener(
+if (searchConfirmation) {
 
-  "click",
+  searchConfirmation.addEventListener(
+    "click",
+    event => {
 
-  event => {
+      if (
+        event.target ===
+        searchConfirmation
+      ) {
 
-    if (
-      event.target ===
-      searchConfirmation
-    ) {
+        hideSearchConfirmation();
 
-      hideSearchConfirmation();
+      }
 
     }
+  );
 
-  }
-
-);
+}
 
 
 /* =========================
-   INICIALIZAÇÃO
+   INÍCIO
 ========================= */
 
 renderProducts(products);
@@ -1402,27 +1136,18 @@ renderWishlist();
 ========================= */
 
 if (
-  "serviceWorker" in
-  navigator
+  "serviceWorker" in navigator
 ) {
 
   window.addEventListener(
-
     "load",
-
     () => {
 
-      navigator
-        .serviceWorker
-        .register(
-          "./sw.js"
-        )
-        .catch(
-          console.error
-        );
+      navigator.serviceWorker
+        .register("./sw.js")
+        .catch(console.error);
 
     }
-
   );
 
 }
