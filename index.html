@@ -4,17 +4,11 @@
 <head>
   <meta charset="UTF-8" />
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <meta name="theme-color" content="#7a3d63" />
 
-  <meta
-    name="description"
-    content="PWA mobile-first para comparação de preços de maquiagem."
-  />
+  <meta name="description" content="PWA mobile-first para comparação de preços de maquiagem." />
 
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
@@ -38,11 +32,7 @@
         </h1>
       </div>
 
-      <button
-        id="wishlistTopBtn"
-        class="icon-btn"
-        aria-label="Abrir lista de desejos"
-      >
+      <button id="wishlistTopBtn" class="icon-btn" aria-label="Abrir lista de desejos">
         ♡
       </button>
 
@@ -51,10 +41,7 @@
     <main>
 
       <!-- TELA INICIAL -->
-      <section
-        id="homeView"
-        class="view active"
-      >
+      <section id="homeView" class="view active">
 
         <section class="hero">
 
@@ -83,11 +70,7 @@
 
             <span>⌕</span>
 
-            <input
-              id="brand"
-              type="text"
-              placeholder="Ex.: Maybelline"
-            />
+            <input id="brand" type="text" placeholder="Ex.: Maybelline" />
 
           </div>
 
@@ -99,11 +82,7 @@
 
             <span>⌕</span>
 
-            <input
-              id="category"
-              type="text"
-              placeholder="Ex.: Base, batom, blush..."
-            />
+            <input id="category" type="text" placeholder="Ex.: Base, batom, blush..." />
 
           </div>
 
@@ -125,19 +104,13 @@
 
             </div>
 
-            <span
-              id="productCount"
-              class="pill"
-            >
+            <span id="productCount" class="pill">
               0 itens
             </span>
 
           </div>
 
-          <div
-            id="productList"
-            class="product-list"
-          ></div>
+          <div id="productList" class="product-list"></div>
 
         </section>
 
@@ -145,10 +118,7 @@
 
 
       <!-- LISTA DE DESEJOS -->
-      <section
-        id="wishlistView"
-        class="view"
-      >
+      <section id="wishlistView" class="view">
 
         <section class="hero compact">
 
@@ -183,19 +153,13 @@
 
             </div>
 
-            <span
-              id="wishlistCount"
-              class="pill"
-            >
+            <span id="wishlistCount" class="pill">
               0 itens
             </span>
 
           </div>
 
-          <div
-            id="wishlist"
-            class="wishlist-list"
-          ></div>
+          <div id="wishlist" class="wishlist-list"></div>
 
         </section>
 
@@ -205,11 +169,7 @@
 
 
     <!-- BOTÃO PRINCIPAL -->
-    <button
-      id="searchFab"
-      class="fab"
-      aria-label="Pesquisar produtos"
-    >
+    <button id="searchFab" class="fab" aria-label="Pesquisar produtos">
 
       <span>⌕</span>
 
@@ -221,15 +181,9 @@
 
 
     <!-- NAVEGAÇÃO INFERIOR -->
-    <nav
-      class="bottom-nav"
-      aria-label="Navegação principal"
-    >
+    <nav class="bottom-nav" aria-label="Navegação principal">
 
-      <button
-        class="nav-item active"
-        data-view="homeView"
-      >
+      <button class="nav-item active" data-view="homeView">
 
         <span>⌂</span>
 
@@ -240,10 +194,7 @@
       </button>
 
 
-      <button
-        class="nav-item"
-        data-view="wishlistView"
-      >
+      <button class="nav-item" data-view="wishlistView">
 
         <span>♡</span>
 
@@ -260,17 +211,12 @@
 
   <!-- MODAL DE CONFIRMAÇÃO -->
 
-  <div
-    id="searchConfirmation"
-    class="modal-overlay"
-  >
+  <div id="searchConfirmation" class="modal-overlay">
 
-    <div
-      id="confirmationModal"
-      class="confirmation-modal"
-    >
-
-      <div id="lottie-container"></div>
+    <div id="confirmationModal" class="confirmation-modal">
+      <div class="check-icon">
+        ✓
+      </div>
 
       <h2>
         Pesquisa concluída!
@@ -280,10 +226,16 @@
         Encontramos as melhores ofertas para você.
       </p>
 
-      <button
-        id="closeConfirmation"
-        class="confirmation-btn"
-      >
+
+      <h2>
+        Pesquisa concluída!
+      </h2>
+
+      <p>
+        Encontramos as melhores ofertas para você.
+      </p>
+
+      <button id="closeConfirmation" class="confirmation-btn">
         Ver resultados
       </button>
 
@@ -293,29 +245,19 @@
 
 
   <!-- LOTTIE -->
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"
-  ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
 
 
   <!-- MOTION ONE -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/@motionone/dom/dist/motion.prod.js"
-  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/@motionone/dom/dist/motion.prod.js"></script>
 
 
   <!-- JAVASCRIPT -->
-    <!-- CONFIRMAÇÃO DA PESQUISA -->
+  <!-- CONFIRMAÇÃO DA PESQUISA -->
 
-  <div
-    id="searchConfirmation"
-    class="modal-overlay"
-  >
+  <div id="searchConfirmation" class="modal-overlay">
 
-    <div
-      id="confirmationModal"
-      class="confirmation-modal"
-    >
+    <div id="confirmationModal" class="confirmation-modal">
 
       <div id="lottie-container"></div>
 
@@ -327,10 +269,7 @@
         Encontramos as melhores ofertas para você.
       </p>
 
-      <button
-        id="closeConfirmation"
-        class="confirmation-btn"
-      >
+      <button id="closeConfirmation" class="confirmation-btn">
         Ver resultados
       </button>
 
