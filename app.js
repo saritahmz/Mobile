@@ -63,6 +63,8 @@ const products = [
 const brand = document.querySelector("#brand");
 const category = document.querySelector("#category");
 
+const searchError = document.querySelector("#searchError");
+
 const productList = document.querySelector("#productList");
 const productCount = document.querySelector("#productCount");
 
@@ -917,27 +919,36 @@ function hideSearchConfirmation() {
 
 function searchProducts() {
 
+  // Se os dois campos estiverem vazios
   if (
     brand.value.trim() === "" &&
     category.value.trim() === ""
   ) {
-    alert("Preencha a marca ou a categoria para pesquisar.");
+
+    // Mostra a mensagem na tela
+    searchError.classList.add("show");
+
+    // Para a pesquisa
     return;
   }
 
-  productSkeletons();
+  // Se tiver algo preenchido, esconde a mensagem
+  searchError.classList.remove("show");
 
+  // Mostra os skeletons
+  productSkeletons();
 
   const selectedBrand =
     brand.value
       .trim()
       .toLowerCase();
 
-
   const selectedCategory =
     category.value
       .trim()
       .toLowerCase();
+
+  
 
 
   setTimeout(() => {
