@@ -18,4 +18,5 @@ A interface deve seguir o princípio da Zona do Polegar, posicionando os princip
 
 Integrantes:
 Isabelle da Silveira de Paula Felipe
+
 Sarah Cristina Meszaros Santos
