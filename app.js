@@ -917,6 +917,14 @@ function hideSearchConfirmation() {
 
 function searchProducts() {
 
+  if (
+    brand.value.trim() === "" &&
+    category.value.trim() === ""
+  ) {
+    alert("Preencha a marca ou a categoria para pesquisar.");
+    return;
+  }
+
   productSkeletons();
 
 
