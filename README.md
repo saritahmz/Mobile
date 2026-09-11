@@ -15,3 +15,7 @@ A interface deve permitir uma pesquisa simples e rápida, com campos para seleci
 Requisito obrigatório — Thumb-Friendly Zone (Zona do Polegar):
 
 A interface deve seguir o princípio da Zona do Polegar, posicionando os principais elementos interativos na região inferior da tela, facilitando o uso do aplicativo com apenas uma mão. A navegação principal deve ficar em uma barra de navegação inferior, e o botão de ação principal, como “Pesquisar”, também deve estar em uma posição de fácil alcance do polegar. Os elementos mais importantes não devem depender exclusivamente de botões localizados na parte superior da tela.
+
+Integrantes:
+Isabelle da Silveira de Paula Felipe
+Sarah Cristina Meszaros Santos
