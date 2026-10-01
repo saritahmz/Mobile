@@ -87,6 +87,13 @@ const confirmationModal = document.querySelector("#confirmationModal");
 
 const closeConfirmationBtn = document.querySelector("#closeConfirmation");
 
+let auth0Client = null;
+let currentUser = null;
+
+const AUTH0_DOMAIN = "dev-t61wzeqateqjuonc.us.auth0.com";
+const AUTH0_CLIENT_ID = "7Q6ncWzJ9K8VoAzlWyK8ycVCXNNVsJDV";
+const AUTH0_REDIRECT_URI = "https://saritahmz.github.io/Mobile/";
+
 
 /* =========================
    LISTA DE DESEJOS
@@ -948,7 +955,7 @@ function searchProducts() {
       .trim()
       .toLowerCase();
 
-  
+
 
 
   setTimeout(() => {
@@ -1150,9 +1157,108 @@ renderProducts(products);
 renderWishlist();
 
 
-/* =========================
-   SERVICE WORKER
-========================= */
+// =========================
+// AUTH0
+// =========================
+
+async function initAuth0() {
+  try {
+    auth0Client = await auth0.createAuth0Client({
+      domain: AUTH0_DOMAIN,
+      clientId: AUTH0_CLIENT_ID,
+      authorizationParams: {
+        redirect_uri: AUTH0_REDIRECT_URI
+      }
+    });
+
+    // Verifica se acabou de voltar do login
+    if (window.location.search.includes("code=") &&
+      window.location.search.includes("state=")) {
+
+      await auth0Client.handleRedirectCallback();
+
+      window.history.replaceState(
+        {},
+        document.title,
+        window.location.pathname
+      );
+    }
+
+    const isAuthenticated = await auth0Client.isAuthenticated();
+
+    updateAuthUI(isAuthenticated);
+
+    if (isAuthenticated) {
+      currentUser = await auth0Client.getUser();
+      showUserProfile(currentUser);
+    }
+
+  } catch (error) {
+    console.error("Erro no Auth0:", error);
+  }
+}
+
+function updateAuthUI(isAuthenticated) {
+  const loginBtn = document.querySelector("#loginBtn");
+  const profileBtn = document.querySelector("#profileBtn");
+  const logoutBtn = document.querySelector("#logoutBtn");
+
+  if (!loginBtn || !profileBtn || !logoutBtn) return;
+
+  if (isAuthenticated) {
+    loginBtn.hidden = true;
+    profileBtn.hidden = false;
+    logoutBtn.hidden = false;
+  } else {
+    loginBtn.hidden = false;
+    profileBtn.hidden = true;
+    logoutBtn.hidden = true;
+  }
+}
+
+async function login() {
+  await auth0Client.loginWithRedirect({
+    authorizationParams: {
+      redirect_uri: AUTH0_REDIRECT_URI
+    }
+  });
+}
+
+async function logout() {
+  await auth0Client.logout({
+    logoutParams: {
+      returnTo: AUTH0_REDIRECT_URI
+    }
+  });
+}
+
+function showUserProfile(user) {
+  const profileName = document.querySelector("#profileName");
+  const profileEmail = document.querySelector("#profileEmail");
+
+  if (profileName) {
+    profileName.textContent =
+      user.name || user.nickname || "Usuário";
+  }
+
+  if (profileEmail) {
+    profileEmail.textContent = user.email || "";
+  }
+}
+
+// Botão Entrar
+document.querySelector("#loginBtn")?.addEventListener("click", login);
+
+// Botão Sair
+document.querySelector("#logoutBtn")?.addEventListener("click", logout);
+
+// Botão Perfil
+document.querySelector("#profileBtn")?.addEventListener("click", () => {
+  changeView("profileView");
+});
+
+// Inicia o Auth0
+initAuth0();
 
 if (
   "serviceWorker" in navigator
