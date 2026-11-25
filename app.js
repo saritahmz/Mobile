@@ -1276,3 +1276,61 @@ if (
   );
 
 }
+
+/* =========================
+   CHATBOT BEAUTYCOMPARE
+========================= */
+
+const chatbotButton = document.querySelector("#chatbotButton");
+const chatbotWindow = document.querySelector("#chatbotWindow");
+const closeChatbot = document.querySelector("#closeChatbot");
+const chatbotForm = document.querySelector("#chatbotForm");
+const chatbotInput = document.querySelector("#chatbotInput");
+const chatbotMessages = document.querySelector("#chatbotMessages");
+
+// Abrir chatbot
+if (chatbotButton && chatbotWindow) {
+  chatbotButton.addEventListener("click", () => {
+    chatbotWindow.hidden = false;
+    chatbotInput.focus();
+  });
+}
+
+// Fechar chatbot
+if (closeChatbot && chatbotWindow) {
+  closeChatbot.addEventListener("click", () => {
+    chatbotWindow.hidden = true;
+  });
+}
+
+// Enviar mensagem
+if (chatbotForm) {
+  chatbotForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const message = chatbotInput.value.trim();
+
+    if (!message) return;
+
+    // Mostrar mensagem do usuário
+    const userMessage = document.createElement("div");
+    userMessage.className = "chatbot-message user-message";
+    userMessage.textContent = message;
+
+    chatbotMessages.appendChild(userMessage);
+
+    // Limpar campo
+    chatbotInput.value = "";
+
+    // Resposta temporária
+    const botMessage = document.createElement("div");
+    botMessage.className = "chatbot-message bot-message";
+    botMessage.textContent =
+      "Recebi sua mensagem! Ainda estou sendo configurado para responder suas dúvidas. 💄";
+
+    chatbotMessages.appendChild(botMessage);
+
+    // Rolar para a última mensagem
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+  });
+}
