@@ -6,7 +6,7 @@ const products = [
     category: "Base",
     price: 54.90,
     store: "Amazon",
-    icon: "◉"
+    image: "imagens/fit-me.webp"
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const products = [
     category: "Base",
     price: 69.90,
     store: "Droga Raia",
-    icon: "◉"
+    image: "imagens/superstay.jpg"
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const products = [
     category: "Corretivo",
     price: 39.90,
     store: "Época Cosméticos",
-    icon: "◌"
+    image: "imagens/corretivo.webp"
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const products = [
     category: "Blush",
     price: 18.90,
     store: "Shopee",
-    icon: "●"
+    image: "imagens/blush.webp"
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ const products = [
     category: "Máscara de cílios",
     price: 47.90,
     store: "Amazon",
-    icon: "✦"
+    image: "imagens/mascara.jpg"
   },
   {
     id: 6,
@@ -51,7 +51,7 @@ const products = [
     category: "Batom",
     price: 59.90,
     store: "Sephora",
-    icon: "●"
+    image: "imagens/vinyl-ink.avif"
   }
 ];
 
@@ -218,7 +218,7 @@ function renderProducts(items) {
         <article class="product-card">
 
           <div class="thumb">
-            ${product.icon}
+            <img src="${product.image}" alt="${product.name}">
           </div>
 
 
@@ -386,7 +386,7 @@ function renderWishlist() {
             <article class="wishlist-card">
 
               <div class="thumb">
-                ${product.icon}
+                <img src="${product.image}" alt="${product.name}">
               </div>
 
 
