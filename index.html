@@ -240,7 +240,37 @@
 
   </div>
 
+  <!-- CHATBOT -->
+  <button id="chatbotButton" class="chatbot-button" aria-label="Abrir assistente virtual">
+    💬
+  </button>
 
+  <section id="chatbotWindow" class="chatbot-window" hidden>
+    <header class="chatbot-header">
+      <div>
+        <strong>Assistente BeautyCompare</strong>
+        <p>Como posso ajudar?</p>
+      </div>
+
+      <button id="closeChatbot" class="chatbot-close" aria-label="Fechar chatbot">
+        ×
+      </button>
+    </header>
+
+    <div id="chatbotMessages" class="chatbot-messages">
+      <div class="chatbot-message bot-message">
+        Olá! 💄 Sou o assistente do BeautyCompare. Pode me perguntar sobre maquiagem e produtos!
+      </div>
+    </div>
+
+    <form id="chatbotForm" class="chatbot-input-area">
+      <input type="text" id="chatbotInput" placeholder="Digite sua pergunta..." autocomplete="off" />
+
+      <button type="submit" aria-label="Enviar mensagem">
+        ➤
+      </button>
+    </form>
+  </section>
   <!-- MODAL DE CONFIRMAÇÃO -->
 
   <div id="searchConfirmation" class="modal-overlay">
