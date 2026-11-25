@@ -1105,3 +1105,120 @@ label:not(:first-child) {
 .search-error.show {
   display: block;
 }
+
+/* ===== CHATBOT BEAUTYCOMPARE ===== */
+
+.chatbot-button {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  width: 58px;
+  height: 58px;
+  border: none;
+  border-radius: 50%;
+  background: #e85d9e;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.chatbot-window {
+  position: fixed;
+  right: 20px;
+  bottom: 160px;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  height: 420px;
+  max-height: calc(100vh - 190px);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  font-family: inherit;
+}
+
+.chatbot-window[hidden] {
+  display: none;
+}
+
+.chatbot-header {
+  background: #e85d9e;
+  color: white;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatbot-header p {
+  margin: 4px 0 0;
+  font-size: 12px;
+}
+
+.chatbot-close {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.chatbot-messages {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chatbot-message {
+  padding: 10px 12px;
+  border-radius: 12px;
+  max-width: 85%;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.bot-message {
+  background: #f5e8ef;
+  color: #333;
+  align-self: flex-start;
+}
+
+.user-message {
+  background: #e85d9e;
+  color: white;
+  align-self: flex-end;
+}
+
+.chatbot-input-area {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+.chatbot-input-area input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 12px;
+  outline: none;
+}
+
+.chatbot-input-area button {
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  background: #e85d9e;
+  color: white;
+  cursor: pointer;
+}
