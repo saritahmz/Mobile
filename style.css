@@ -613,7 +613,7 @@ label:not(:first-child) {
     50%;
 
   bottom:
-    calc(78px + env(safe-area-inset-bottom));
+    calc(90px + env(safe-area-inset-bottom));
 
   transform:
     translateX(-50%);
@@ -687,7 +687,7 @@ label:not(:first-child) {
     grid;
 
   grid-template-columns:
-    repeat(2,
+    repeat(3,
       1fr);
 
   padding:
