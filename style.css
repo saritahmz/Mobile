@@ -1110,13 +1110,13 @@ label:not(:first-child) {
 
 .chatbot-button {
   position: fixed;
-  right: 20px;
+  right: max(20px, calc((100vw - 720px) / 2 + 20px));
   bottom: 90px;
   width: 58px;
   height: 58px;
   border: none;
   border-radius: 50%;
-  background: #e85d9e;
+  background: #7a3d63;
   color: white;
   font-size: 25px;
   cursor: pointer;
@@ -1126,7 +1126,7 @@ label:not(:first-child) {
 
 .chatbot-window {
   position: fixed;
-  right: 20px;
+  right: max(20px, calc((100vw - 720px) / 2 + 20px));
   bottom: 160px;
   width: 320px;
   max-width: calc(100vw - 40px);
@@ -1147,7 +1147,7 @@ label:not(:first-child) {
 }
 
 .chatbot-header {
-  background: #e85d9e;
+  background: #7a3d63;
   color: white;
   padding: 16px;
   display: flex;
@@ -1192,7 +1192,7 @@ label:not(:first-child) {
 }
 
 .user-message {
-  background: #e85d9e;
+  background: #7a3d63;
   color: white;
   align-self: flex-end;
 }
@@ -1218,7 +1218,7 @@ label:not(:first-child) {
   border-radius: 50%;
   width: 38px;
   height: 38px;
-  background: #e85d9e;
+  background: #7a3d63;
   color: white;
   cursor: pointer;
 }
